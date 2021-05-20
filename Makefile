@@ -1,5 +1,9 @@
 SHELL=/bin/bash
 
+build:
+	docker-compose up
+down:
+	docker-compose down -v
 dbup:
 	docker-compose up -d postgres
 dbdown:
@@ -15,4 +19,4 @@ migratedown:
 test:
 	go test -v -cover ./...
 
-.PHONY: loadenv dbup dbdown dbstart dbstop migrateup migratedown test
+.PHONY: loadenv dbup dbdown dbstart dbstop migrateup migratedown test build down

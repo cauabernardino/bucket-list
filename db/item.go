@@ -11,7 +11,7 @@ import (
 func (db Database) GetItems() (*models.ItemList, error) {
 	list := &models.ItemList{}
 
-	rows, err := db.Conn.Query("SELECT * FROM items ORDER BY desc")
+	rows, err := db.Conn.Query("SELECT * FROM items ORDER BY created_at desc;")
 	if err != nil {
 		return list, err
 	}

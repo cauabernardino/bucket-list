@@ -10,8 +10,12 @@ RUN curl -L https://github.com/golang-migrate/migrate/releases/download/v4.14.1/
 
 FROM alpine
 WORKDIR /app
-RUN apk add --no-cache ca-certificates && update ca-certificates
+RUN apk add --no-cache ca-certificates && apk update ca-certificates
 COPY --from=builder /build/bin/bucket-list .
 COPY --from=builder /build/migrate.linux-amd64 ./migrate
+COPY init.sh .
+COPY db/migration ./migration
+COPY .env .
 EXPOSE 8080
-ENTRYPOINT ["/app/bucket-list"]
+ENTRYPOINT ["/app/init.sh"]
+CMD ["/app/bucket-list"]

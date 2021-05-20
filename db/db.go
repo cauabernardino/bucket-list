@@ -18,7 +18,7 @@ type Database struct {
 }
 
 // Connect opens a connection with Database
-func Connect(username, password, database string) (Database, error) {
+func Connect() (Database, error) {
 	db := Database{}
 
 	conn, err := sql.Open("postgres", config.DBConnectString)

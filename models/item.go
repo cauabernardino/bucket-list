@@ -17,8 +17,8 @@ type ItemList struct {
 	Items []Item `json:"items"`
 }
 
-// Validate reads the input and validates it
-func (item *Item) Validate(r *http.Request) error {
+// Bind reads the input and validates it
+func (item *Item) Bind(r *http.Request) error {
 	if item.Name == "" {
 		return errors.New("name is required")
 	}
