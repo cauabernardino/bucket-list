@@ -1,3 +1,5 @@
+SHELL=/bin/bash
+
 dbup:
 	docker-compose up -d postgres
 dbdown:
@@ -7,10 +9,10 @@ dbstart:
 dbstop:
 	docker-compose stop postgres
 migrateup:
-	migrate -database "postgresql://bucket_lister:bucket_password@localhost:5432/bucket-list_db?sslmode=disable" -path db/migration up
+	source .env && migrate -database "$${POSTGRES_URL}" -path db/migration up
 migratedown:
-	migrate -database "postgresql://bucket_lister:bucket_password@localhost:5432/bucket-list_db?sslmode=disable" -path db/migration down
+	source .env && migrate -database "$${POSTGRES_URL}" -path db/migration down
 test:
 	go test -v -cover ./...
 
-.PHONY: dbup dbdown dbstart dbstop migrateup migratedown test
+.PHONY: loadenv dbup dbdown dbstart dbstop migrateup migratedown test
