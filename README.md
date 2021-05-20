@@ -7,6 +7,7 @@ Made to practice the [`go-chi`](https://github.com/go-chi/chi) library and effic
 - Docker
 - Docker-compose v1.29+
 - Go v1.16+
+- [Migrate](https://github.com/golang-migrate/migrate)
 
 ## ⚙️ How to Run
 - Change `.env.sample` to `.env` and update the respective values
@@ -18,8 +19,10 @@ Made to practice the [`go-chi`](https://github.com/go-chi/chi) library and effic
 
 - If you want to run outside containers:
     1. change `DB_HOST` value to `localhost` in `.env` file
-    2. `go mod download`
-    3. `go run main.go`
+    2. Start your local Postgres or just the database container with `make dbup`
+    3. Run the migrates: `make migrateup`
+    4. Download modules: `go mod download`
+    5. Start server: `go run main.go`
 
 
 
