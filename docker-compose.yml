@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+    postgres:
+        image: postgres:13.2-alpine
+        container_name: bucket-list_db
+        env_file: .env
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        networks: 
+            - bucket-list
+
+    api:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        env_file: .env
+        depends_on: 
+            - postgres
+        ports:
+            - "8080:8080"
+        networks: 
+            - bucket-list
+
+networks: 
+    bucket-list:
+        driver: bridge
+
+volumes:
+    postgres_data:
